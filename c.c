@@ -3,12 +3,7 @@
 #include "avr/interrupt.h"
 #include "util/delay.h"
 #include "constants.h"
-
-// 1. Инициализация UART
-// 2. Реализация функции передачи символа
-// 3. * Реализация передачи строк
-// 4. * Реализация приёма символа
-
+#include "UART.h"
 
 void uart_init() {
 
@@ -72,32 +67,25 @@ void INT_init() {
 
 volatile uint8_t isADC_conv = 0;
 
-// void USART_Receive(char* buffer) {
+
+// unsigned char USART_Receive( void )
+// {
 //  /* Wait for data to be received */
 //  while ( !(UCSR0A & (1<<RXC0)) )
 //  ;
 //  /* Get and return received data from buffer */
-//  buffer = UDR0;
+//  return UDR0;
 // }
 
-unsigned char USART_Receive( void )
-{
- /* Wait for data to be received */
- while ( !(UCSR0A & (1<<RXC0)) )
- ;
- /* Get and return received data from buffer */
- return UDR0;
-}
 
-
-void USART_Transmit( unsigned char data )
-{
- /* Wait for empty transmit buffer */
- while ( !( UCSR0A & (1<<UDRE0)) )
- ;
- /* Put data into buffer, sends the data */
- UDR0 = data;
-}
+// void USART_Transmit( unsigned char data )
+// {
+//  /* Wait for empty transmit buffer */
+//  while ( !( UCSR0A & (1<<UDRE0)) )
+//  ;
+//  /* Put data into buffer, sends the data */
+//  UDR0 = data;
+// }
 
 uint8_t FROM_UART;
 
@@ -109,11 +97,17 @@ ISR(USART_RX_vect) {
 
 
 void main() {
-    INT_init();
-    uart_init();
-    ADC_init();
-    USART_Transmit('a');
+    // INT_init();
+    // uart_init();
+    // ADC_init();
+    // USART_Transmit('a');
+    UART uart = malloc(sizeof(UART));
+    uart->constructor = uart_constructor;
+    uart->constructor();
     while (1) {
+        uart->USART_Transmit('>');
+        uart->USART_Transmit('\n');
         _delay_ms(100);
     }
+    free(uart);
 }

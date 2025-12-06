@@ -31,7 +31,7 @@ void USART_Transmit(struct UART *uart_item, unsigned char data ){
     UDR0 = uart_item->char_buffer;
 }
 
-void constructor(struct UART *uart_item){
+void uart_constructor(struct UART *uart_item){
   uart_item->uart_init = uart_init;
   uart_item->INT_init = INT_init;
   uart_item = USART_Receive;

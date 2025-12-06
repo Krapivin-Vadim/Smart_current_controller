@@ -13,3 +13,5 @@ typedef struct UART
   void (*USART_Transmit)(struct UART *, unsigned char data);
   void (*constructor)(struct UART *);
 };
+
+void uart_constructor(struct UART *uart_item);
