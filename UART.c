@@ -28,12 +28,14 @@ void USART_Transmit(struct UART *uart_item, unsigned char data ){
     while ( !( UCSR0A & (1<<UDRE0)) )
     ;
     /* Put data into buffer, sends the data */
-    UDR0 = uart_item->char_buffer;
+    UDR0 = data;
 }
 
-void uart_constructor(struct UART *uart_item){
-  uart_item->uart_init = uart_init;
-  uart_item->INT_init = INT_init;
-  uart_item = USART_Receive;
-  uart_item = USART_Transmit;
+UART* uart_constructor(){
+    UART* uart_item = malloc(sizeof(UART));
+    uart_item->uart_init = uart_init;
+    uart_item->INT_init = INT_init;
+    uart_item->USART_Receive = USART_Receive;
+    uart_item->USART_Transmit = USART_Transmit;
+    return uart_item;
 }
