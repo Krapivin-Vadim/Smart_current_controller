@@ -1,15 +1,8 @@
 #include "avr/io.h"
 #include <stdio.h>
 #include "avr/interrupt.h"
-
-#define F_CPU 8000000UL
 #include "util/delay.h"
-
-#define BAUD_rate 19200
-#define UBRR_val F_CPU/16/BAUD_rate - 1
-#define LEN_SIZE 255
-
-
+#include "constants.h"
 
 // 1. Инициализация UART
 // 2. Реализация функции передачи символа
