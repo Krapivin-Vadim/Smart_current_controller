@@ -49,7 +49,7 @@ int main() {
     char data[LEN_SIZE];
     while (1) {
         
-        char* output = "CURRENT: %d TARGET: %d\n\r";
+        char* output = "CURRENT: %d\n\r";
         uint32_t ADC_meas = (uint32_t)ADC_conversion(6) * 5000 / 1024  / 100;
         uint8_t len = snprintf(data, LEN_SIZE, output, ADC_meas, (uint8_t)current_level);
         if(ADC_meas > current_level){
