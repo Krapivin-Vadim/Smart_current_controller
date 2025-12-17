@@ -1,5 +1,5 @@
 PRG            = c
-OBJ            = c.o UART.o
+OBJ            = c.o UART.o SPI.o
 #MCU_TARGET     = at90s2313
 #MCU_TARGET     = at90s2333
 #MCU_TARGET     = at90s4414

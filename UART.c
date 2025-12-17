@@ -31,11 +31,17 @@ void USART_Transmit(struct UART *uart_item, unsigned char data ){
     UDR0 = data;
 }
 
+void uart_tx_str(struct UART *uart, char* data, char len){
+    char i = 0;
+    for (i = 0; i < len; ++i) uart->USART_Transmit(uart, data[i]);    
+}
+
 UART* uart_constructor(){
     UART* uart_item = malloc(sizeof(UART));
     uart_item->uart_init = uart_init;
     uart_item->INT_init = INT_init;
     uart_item->USART_Receive = USART_Receive;
     uart_item->USART_Transmit = USART_Transmit;
+    uart_item->USART_Transmit_str = uart_tx_str;
     return uart_item;
 }

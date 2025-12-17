@@ -14,6 +14,7 @@ typedef struct UART
   void (*USART_Receive)(struct UART *);
   void (*USART_Transmit)(struct UART *, unsigned char data);
   void (*constructor)(struct UART *);
+  void (*USART_Transmit_str)(struct UART *, char* data, char len);
 } UART;
 
 UART* uart_constructor();
